@@ -87,12 +87,18 @@ class SoapWebServiceController extends ContainerAware
      */
     public function definitionAction($webservice)
     {
+        $path = $this->container->get('router')->generate(
+            '_webservice_call',
+            array('webservice' => $webservice),
+            true
+        );
+
+        if ($this->container->getParameter('besimple.https')) {
+            $path = preg_replace('#http#', 'https', $path);
+        }
+
         $response = new Response($this->getWebServiceContext($webservice)->getWsdlFileContent(
-            $this->container->get('router')->generate(
-                '_webservice_call',
-                array('webservice' => $webservice),
-                true
-            )
+            $path
         ));
 
         $request = $this->container->get('request');

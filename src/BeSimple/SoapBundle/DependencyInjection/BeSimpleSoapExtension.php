@@ -58,6 +58,7 @@ class BeSimpleSoapExtension extends Extension
         }
 
         $container->setParameter('besimple.soap.definition.dumper.options.stylesheet', $config['wsdl_dumper']['stylesheet']);
+        $container->setParameter('besimple.https', $config['https']);
 
         foreach($config['services'] as $name => $serviceConfig) {
             $serviceConfig['name'] = $name;
