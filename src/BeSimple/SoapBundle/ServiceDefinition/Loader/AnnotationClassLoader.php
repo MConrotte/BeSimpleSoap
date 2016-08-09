@@ -75,6 +75,11 @@ class AnnotationClassLoader extends Loader
             $serviceArguments = array();
             $serviceMethod    =
             $serviceReturn    = null;
+            $rootNodeName = 'return';
+            if (!isset($_SESSION['itemName'])) {
+                $_SESSION['itemName'] = 'item';
+            }
+
 
             foreach ($this->reader->getMethodAnnotations($method) as $annotation) {
                 if ($annotation instanceof Annotation\Header) {
@@ -96,6 +101,10 @@ class AnnotationClassLoader extends Loader
                     }
 
                     $serviceReturn = $annotation->getPhpType();
+                } elseif ($annotation instanceof Annotation\RootNameAnnotation) {
+                    $rootNodeName = $annotation->name;
+                } elseif ($annotation instanceof Annotation\ItemNameAnnotation) {
+                    $_SESSION['itemName'] = $annotation->name;
                 }
             }
 
@@ -116,7 +125,7 @@ class AnnotationClassLoader extends Loader
                     throw new \LogicException(sprintf('@Soap\Result non-existent for "%s".', $method->getName()));
                 }
 
-                $serviceMethod->setOutput($this->loadType($serviceReturn));
+                $serviceMethod->setOutput($this->loadType($serviceReturn), $rootNodeName);
 
                 $definition->addMethod($serviceMethod);
             }

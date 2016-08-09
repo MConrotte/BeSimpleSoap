@@ -114,10 +114,18 @@ class ServiceBinder
      *
      * @return mixed
      */
-    public function processServiceMethodReturnValue($name, $return)
+    public function processServiceMethodReturnValue($name, $return, $rootNode = 'return')
     {
         $methodDefinition = $this->definition->getMethod($name);
 
-        return $this->responseMessageBinder->processMessage($methodDefinition, $return, $this->definition->getTypeRepository());
+        return $this->responseMessageBinder->processMessage($methodDefinition, $return, $this->definition->getTypeRepository(), $rootNode);
+    }
+
+    /**
+     * @return \BeSimple\SoapBundle\ServiceDefinition\ServiceDefinition
+     */
+    public function getDefinition()
+    {
+        return $this->definition;
     }
 }

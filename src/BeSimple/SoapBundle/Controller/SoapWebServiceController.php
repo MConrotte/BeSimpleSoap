@@ -192,10 +192,17 @@ class SoapWebServiceController extends ContainerAware
                 $this->soapServer->addSoapHeader($header->toNativeSoapHeader());
             }
 
+            $rootNode = 'return';
+            $definition = $this->serviceBinder->getDefinition();
+            foreach ($definition->getMethod($method)->getOutput()->all() as $index => $item) {
+                $rootNode = $index;
+            }
+
             // return operation return value to soap server
             return $this->serviceBinder->processServiceMethodReturnValue(
                 $method,
-                $response->getReturnValue()
+                $response->getReturnValue(),
+                $rootNode
             );
         } else {
             // collect request soap headers

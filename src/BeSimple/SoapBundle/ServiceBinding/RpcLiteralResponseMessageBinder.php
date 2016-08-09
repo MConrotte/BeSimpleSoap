@@ -28,11 +28,11 @@ class RpcLiteralResponseMessageBinder implements MessageBinderInterface
 
     private $messageRefs = array();
 
-    public function processMessage(Method $messageDefinition, $message, TypeRepository $typeRepository)
+    public function processMessage(Method $messageDefinition, $message, TypeRepository $typeRepository, $rootNode = 'return')
     {
         $this->typeRepository = $typeRepository;
 
-        return $this->processType($messageDefinition->getOutput()->get('return')->getType(), $message);
+        return $this->processType($messageDefinition->getOutput()->get($rootNode)->getType(), $message);
     }
 
     private function processType($phpType, $message)
@@ -43,7 +43,7 @@ class RpcLiteralResponseMessageBinder implements MessageBinderInterface
         if ($type instanceof ArrayOfType) {
             $isArray = true;
 
-            $type = $this->typeRepository->getType($type->get('item')->getType());
+            $type = $this->typeRepository->getType($type->get($_SESSION['itemName'])->getType());
         }
 
         if ($type instanceof ComplexType) {

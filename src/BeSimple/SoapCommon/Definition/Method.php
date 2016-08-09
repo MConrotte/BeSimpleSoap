@@ -66,9 +66,9 @@ class Method
         $this->input->add($name, $type);
     }
 
-    public function setOutput($type)
+    public function setOutput($type, $nodeName = 'return')
     {
-        $this->output->add('return', $type);
+        $this->output->add($nodeName, $type);
     }
 
     public function getHeaders()
