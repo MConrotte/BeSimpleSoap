@@ -40,6 +40,7 @@ class Configuration
         $this->addClientSection($rootNode);
         $this->addServicesSection($rootNode);
         $this->addWsdlDumperSection($rootNode);
+        $this->addHttps($rootNode);
 
         $rootNode
             ->children()
@@ -163,6 +164,15 @@ class Configuration
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    private function addHttps(ArrayNodeDefinition $rootNode)
+    {
+        $rootNode
+            ->children()
+                ->scalarNode('https')->defaultFalse()->end()
             ->end()
         ;
     }
