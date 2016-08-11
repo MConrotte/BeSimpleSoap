@@ -43,7 +43,7 @@ class RpcLiteralResponseMessageBinder implements MessageBinderInterface
         if ($type instanceof ArrayOfType) {
             $isArray = true;
 
-            $type = $this->typeRepository->getType($type->get($_SESSION['itemName'])->getType());
+            $type = $this->typeRepository->getType($type->get($type->getItemName())->getType());
         }
 
         if ($type instanceof ComplexType) {

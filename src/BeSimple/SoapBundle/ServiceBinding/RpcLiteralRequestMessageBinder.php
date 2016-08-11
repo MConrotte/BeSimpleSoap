@@ -55,7 +55,7 @@ class RpcLiteralRequestMessageBinder implements MessageBinderInterface
             $isArray = true;
             $array = array();
 
-            $type = $this->typeRepository->getType($type->get($_SESSION['itemName'])->getType());
+            $type = $this->typeRepository->getType($type->get($type->getItemName())->getType());
         }
 
         // @TODO Fix array reference

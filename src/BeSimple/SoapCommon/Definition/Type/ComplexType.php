@@ -19,6 +19,8 @@ use BeSimple\SoapCommon\Definition\Message;
  */
 class ComplexType extends Message implements TypeInterface
 {
+    protected $itemName = 'item';
+
     public function __construct($phpType, $xmlType)
     {
         $this->phpType = $phpType;
@@ -35,5 +37,21 @@ class ComplexType extends Message implements TypeInterface
     public function getXmlType()
     {
         return $this->xmlType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getItemName()
+    {
+        return $this->itemName;
+    }
+
+    /**
+     * @param string $itemName
+     */
+    public function setItemName($itemName)
+    {
+        $this->itemName = $itemName;
     }
 }

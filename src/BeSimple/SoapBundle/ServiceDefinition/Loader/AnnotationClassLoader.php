@@ -76,9 +76,7 @@ class AnnotationClassLoader extends Loader
             $serviceMethod    =
             $serviceReturn    = null;
             $rootNodeName = 'return';
-            if (!isset($_SESSION['itemName'])) {
-                $_SESSION['itemName'] = 'item';
-            }
+            $itemName = 'item';
 
 
             foreach ($this->reader->getMethodAnnotations($method) as $annotation) {
@@ -104,7 +102,7 @@ class AnnotationClassLoader extends Loader
                 } elseif ($annotation instanceof Annotation\RootNameAnnotation) {
                     $rootNodeName = $annotation->name;
                 } elseif ($annotation instanceof Annotation\ItemNameAnnotation) {
-                    $_SESSION['itemName'] = $annotation->name;
+                    $itemName = $annotation->name;
                 }
             }
 
@@ -125,7 +123,7 @@ class AnnotationClassLoader extends Loader
                     throw new \LogicException(sprintf('@Soap\Result non-existent for "%s".', $method->getName()));
                 }
 
-                $serviceMethod->setOutput($this->loadType($serviceReturn), $rootNodeName);
+                $serviceMethod->setOutput($this->loadType($serviceReturn, $itemName), $rootNodeName);
 
                 $definition->addMethod($serviceMethod);
             }
@@ -149,13 +147,13 @@ class AnnotationClassLoader extends Loader
         }
     }
 
-    private function loadType($phpType)
+    private function loadType($phpType, $itemName='item')
     {
         if (false !== $arrayOf = $this->typeRepository->getArrayOf($phpType)) {
             $this->loadType($arrayOf);
         }
 
-        if (!$this->typeRepository->hasType($phpType)) {
+        if (!$this->typeRepository->hasType($phpType, $itemName)) {
             $complexTypeResolver = $this->resolve($phpType, 'annotation_complextype');
             if (!$complexTypeResolver) {
                 throw new \Exception();
