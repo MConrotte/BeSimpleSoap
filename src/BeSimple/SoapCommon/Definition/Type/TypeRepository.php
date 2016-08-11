@@ -80,7 +80,7 @@ class TypeRepository
         $this->addClassmap($type->getXmlType(), $phpType);
     }
 
-    public function hasType($type)
+    public function hasType($type,$itemName = 'item')
     {
         if ($type instanceof TypeInterface) {
             $phpType = $type->getPhpType();
@@ -100,7 +100,7 @@ class TypeRepository
                     $xmlTypeOf = $arrayOfType->getXmlType();
                 }
 
-                $arrayType = new ArrayOfType($type, $arrayOf, $xmlTypeOf);
+                $arrayType = new ArrayOfType($type, $arrayOf, $xmlTypeOf, $itemName);
                 $this->addType($type, $arrayType);
 
                 return true;
