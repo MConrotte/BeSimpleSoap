@@ -84,8 +84,14 @@ class RpcLiteralRequestMessageBinder implements MessageBinderInterface
                 $message = $this->checkComplexType($phpType, $message);
             }
         } elseif ($isArray) {
-            if (isset($message->item)) {
-                $message = $message->item;
+            if (count(get_object_vars($message)) === 1) {
+                $key = key(get_object_vars($message));
+            } else {
+                $key = 'item';
+            }
+
+            if (isset($message->$key)) {
+                $message = $message->$key;
             } else {
                 $message = $array;
             }
