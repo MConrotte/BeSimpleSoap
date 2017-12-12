@@ -82,9 +82,7 @@ class AnnotationClassLoader extends Loader
             foreach ($this->reader->getMethodAnnotations($method) as $annotation) {
                 if ($annotation instanceof Annotation\Header) {
                     $serviceHeaders[$annotation->getValue()] = $this->loadType($annotation->getPhpType());
-                } elseif ($annotation instanceof Annotation\Param) {
-                    $serviceArguments[$annotation->getValue()] = $this->loadType($annotation->getPhpType());
-                } elseif ($annotation instanceof Annotation\Method) {
+                }elseif ($annotation instanceof Annotation\Method) {
                     if ($serviceMethod) {
                         throw new \LogicException(sprintf('@Soap\Method defined twice for "%s".', $method->getName()));
                     }
@@ -103,6 +101,11 @@ class AnnotationClassLoader extends Loader
                     $rootNodeName = $annotation->name;
                 } elseif ($annotation instanceof Annotation\ItemNameAnnotation) {
                     $itemName = $annotation->name;
+                } elseif ($annotation instanceof Annotation\Param) {
+                    if ($annotation->getSubItem() !== null) {
+                        $itemName = $annotation->getSubItem();
+                    }
+                    $serviceArguments[$annotation->getValue()] = $this->loadType($annotation->getPhpType(), $itemName);
                 }
             }
 

@@ -18,6 +18,7 @@ class Param extends Configuration implements TypedElementInterface
     private $value;
     private $phpType;
     private $xmlType;
+    private $subItem;
 
     public function getValue()
     {
@@ -47,6 +48,22 @@ class Param extends Configuration implements TypedElementInterface
     public function setXmlType($xmlType)
     {
         $this->xmlType = $xmlType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubItem()
+    {
+        return $this->subItem;
+    }
+
+    /**
+     * @param mixed $subItem
+     */
+    public function setSubItem($subItem)
+    {
+        $this->subItem = $subItem;
     }
 
     public function getAliasName()
