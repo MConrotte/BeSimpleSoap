@@ -121,7 +121,7 @@ class Definition
 
     public function getMethod($name, $default = null)
     {
-        return isset($this->methods[$name]) ? $this->methods[$name] : $default;
+        return $this->methods[$name] ?? $default;
     }
 
     public function getMethods()

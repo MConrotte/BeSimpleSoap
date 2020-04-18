@@ -24,5 +24,5 @@ interface MessageBinderInterface
      *
      * @return mixed
      */
-    function processMessage(Method $messageDefinition, $message, TypeRepository $typeRepository);
+    function processMessage(Method $messageDefinition, $message, TypeRepository $typeRepository = null);
 }

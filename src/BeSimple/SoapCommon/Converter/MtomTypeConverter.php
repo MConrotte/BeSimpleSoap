@@ -12,6 +12,7 @@
 
 namespace BeSimple\SoapCommon\Converter;
 
+use BeSimple\SoapBundle\Soap\SoapRequest;
 use BeSimple\SoapCommon\Helper;
 use BeSimple\SoapCommon\Mime\Part as MimePart;
 use BeSimple\SoapCommon\SoapKernel;
@@ -49,7 +50,7 @@ class MtomTypeConverter implements TypeConverterInterface, SoapKernelAwareInterf
     /**
      * {@inheritDoc}
      */
-    public function convertXmlToPhp($data)
+    public function convertXmlToPhp($data, SoapRequest $request = null)
     {
         $doc = new \DOMDocument();
         $doc->loadXML($data);

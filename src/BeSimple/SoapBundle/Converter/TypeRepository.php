@@ -43,7 +43,7 @@ class TypeRepository
 
     public function getXmlTypeMapping($phpType)
     {
-        return isset($this->defaultTypeMap[$phpType]) ? $this->defaultTypeMap[$phpType] : null;
+        return $this->defaultTypeMap[$phpType] ?? null;
     }
 
     public function fixTypeInformation(ServiceDefinition $definition)

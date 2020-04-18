@@ -17,7 +17,7 @@ use BeSimple\SoapBundle\ServiceDefinition\Method;
  */
 class DocumentLiteralWrappedResponseMessageBinder implements MessageBinderInterface
 {
-    public function processMessage(Method $messageDefinition, $message)
+    public function processMessage(Method $messageDefinition, $message, null)
     {
         $result = new \stdClass();
         $result->{$messageDefinition->getName().'Result'} = $message;

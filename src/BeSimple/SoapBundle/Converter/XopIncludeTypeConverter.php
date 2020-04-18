@@ -12,7 +12,7 @@ namespace BeSimple\SoapBundle\Converter;
 
 use BeSimple\SoapBundle\Soap\SoapRequest;
 use BeSimple\SoapBundle\Soap\SoapResponse;
-use BeSimple\SoapBundle\Util\Strings;
+use BeSimple\SoapBundle\Util\StringHelper;
 use BeSimple\SoapCommon\Converter\TypeConverterInterface;
 
 /**
@@ -30,7 +30,7 @@ class XopIncludeTypeConverter implements TypeConverterInterface
         return 'base64Binary';
     }
 
-    public function convertXmlToPhp(SoapRequest $request, $data)
+    public function convertXmlToPhp($data, SoapRequest $request =null)
     {
         $doc = new \DOMDocument();
         $doc->loadXML($data);
@@ -40,7 +40,7 @@ class XopIncludeTypeConverter implements TypeConverterInterface
 
         $ref = $include->getAttribute('href');
 
-        if (Strings::startsWith($ref, 'cid:')) {
+        if (StringHelper::startsWith($ref, 'cid:')) {
             $cid = urldecode(substr($ref, 4));
 
             return $request->getSoapAttachments()->get($cid)->getContent();
@@ -49,7 +49,7 @@ class XopIncludeTypeConverter implements TypeConverterInterface
         return $data;
     }
 
-    public function convertPhpToXml(SoapResponse $response, $data)
+    public function convertPhpToXml($data)
     {
         return $data;
     }

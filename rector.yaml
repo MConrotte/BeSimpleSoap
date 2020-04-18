@@ -1,0 +1,18 @@
+# rector.yaml
+parameters:
+  sets:
+   # - 'php70'
+   # - 'php71'
+   # - 'php72'
+   # - 'symfony34'
+    - 'symfony40'
+   # - 'symfony41'
+   # - 'symfony42'
+   # - 'symfony43'
+   # - 'symfony44'
+  exclude_paths:
+    - '/src/*/Tests/*'
+    - '/vendor/*'
+  autoload_paths:
+    - 'vendor/autoload.php'
+    #- 'vendor/symfony/dependency-injection/*'

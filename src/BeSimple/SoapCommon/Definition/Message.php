@@ -40,7 +40,7 @@ class Message
 
     public function get($name, $default = null)
     {
-        return isset($this->parts[$name]) ? $this->parts[$name] : $default;
+        return $this->parts[$name] ?? $default;
     }
 
     public function isEmpty()

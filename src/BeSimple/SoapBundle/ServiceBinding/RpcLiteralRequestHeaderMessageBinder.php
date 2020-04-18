@@ -25,7 +25,7 @@ class RpcLiteralRequestHeaderMessageBinder extends RpcLiteralRequestMessageBinde
         $this->header = $header;
     }
 
-    public function processMessage(Method $messageDefinition, $message, TypeRepository $typeRepository)
+    public function processMessage(Method $messageDefinition, $message, TypeRepository $typeRepository = null)
     {
         $this->typeRepository = $typeRepository;
         $headerDefinition = $messageDefinition->getHeaders()->get($this->header);

@@ -16,8 +16,8 @@ use BeSimple\SoapBundle\Handler\ExceptionHandler;
 use BeSimple\SoapBundle\Soap\SoapRequest;
 use BeSimple\SoapBundle\Soap\SoapResponse;
 use BeSimple\SoapServer\SoapServerBuilder;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Debug\Exception\FlattenException;
@@ -30,8 +30,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  * @author Christian Kerl <christian-kerl@web.de>
  * @author Francis Besset <francis.besset@gmail.com>
  */
-class SoapWebServiceController implements ContainerAwareInterface
+class SoapWebServiceController extends AbstractController
 {
+
     use ContainerAwareTrait;
 
     /**

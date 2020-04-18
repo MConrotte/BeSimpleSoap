@@ -12,6 +12,8 @@
 
 namespace BeSimple\SoapCommon\Converter;
 
+use BeSimple\SoapBundle\Soap\SoapRequest;
+
 /**
  * @author Christian Kerl <christian-kerl@web.de>
  */
@@ -27,7 +29,7 @@ class DateTimeTypeConverter implements TypeConverterInterface
         return 'dateTime';
     }
 
-    public function convertXmlToPhp($data)
+    public function convertXmlToPhp($data, SoapRequest $request = null)
     {
         $doc = new \DOMDocument();
         $doc->loadXML($data);

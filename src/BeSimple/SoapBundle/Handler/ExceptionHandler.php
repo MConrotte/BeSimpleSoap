@@ -45,7 +45,7 @@ class ExceptionHandler
         $code = $this->exception->getStatusCode();
 
         throw new ReceiverSoapFault(
-            isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
+            Response::$statusTexts[$code] ?? '',
             null,
             $this->details
         );

@@ -28,7 +28,7 @@ class RpcLiteralResponseMessageBinder implements MessageBinderInterface
 
     private $messageRefs = array();
 
-    public function processMessage(Method $messageDefinition, $message, TypeRepository $typeRepository, $rootNode = 'return')
+    public function processMessage(Method $messageDefinition, $message, TypeRepository $typeRepository = null, $rootNode = 'return')
     {
         $this->typeRepository = $typeRepository;
 

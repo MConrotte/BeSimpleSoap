@@ -12,6 +12,8 @@
 
 namespace BeSimple\SoapCommon\Converter;
 
+use BeSimple\SoapBundle\Soap\SoapRequest;
+
 /**
  * Type converter interface.
  *
@@ -40,7 +42,7 @@ interface TypeConverterInterface
      *
      * @return mixed
      */
-    function convertXmlToPhp($data);
+    function convertXmlToPhp($data, SoapRequest $request = null);
 
     /**
      * Convert PHP type to XML string.

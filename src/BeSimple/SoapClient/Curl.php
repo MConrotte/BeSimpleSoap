@@ -83,7 +83,7 @@ class Curl
 
         if (isset($options['proxy_host'])) {
             if (false !== $options['proxy_host']) {
-                $proxyHost = $options['proxy_host'].(isset($options['proxy_port']) ? $options['proxy_port'] : 8080);
+                $proxyHost = $options['proxy_host'].($options['proxy_port'] ?? 8080);
             } else {
                 $proxyHost = false;
             }
@@ -100,7 +100,7 @@ class Curl
         }
 
         if (isset($options['login'])) {
-            curl_setopt($this->ch, CURLOPT_HTTPAUTH, isset($options['extra_options']['http_auth']) ? $options['extra_options']['http_auth'] : CURLAUTH_ANY);
+            curl_setopt($this->ch, CURLOPT_HTTPAUTH, $options['extra_options']['http_auth'] ?? CURLAUTH_ANY);
             curl_setopt($this->ch, CURLOPT_USERPWD, $options['login'].':'.$options['password']);
         }
         if (isset($options['local_cert'])) {

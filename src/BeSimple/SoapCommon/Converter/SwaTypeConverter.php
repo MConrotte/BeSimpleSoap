@@ -16,6 +16,7 @@ use BeSimple\SoapCommon\Mime\Part as MimePart;
 use BeSimple\SoapCommon\SoapKernel;
 use BeSimple\SoapCommon\Converter\SoapKernelAwareInterface;
 use BeSimple\SoapCommon\Converter\TypeConverterInterface;
+use BeSimple\SoapBundle\Soap\SoapRequest;
 
 /**
  * SwA type converter.
@@ -48,7 +49,7 @@ class SwaTypeConverter implements TypeConverterInterface, SoapKernelAwareInterfa
     /**
      * {@inheritDoc}
      */
-    public function convertXmlToPhp($data)
+    public function convertXmlToPhp($data, SoapRequest $request = null)
     {
         $doc = new \DOMDocument();
         $doc->loadXML($data);
